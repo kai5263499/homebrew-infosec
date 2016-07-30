@@ -3,24 +3,26 @@ os: osx
 env: OSX=10.11
 osx_image: xcode7.3
 rvm: system
-
 before_install:
-  - if [ -f ".git/shallow" ]; then travis_retry git fetch --unshallow; fi
-  - sudo chown -R $USER $(brew --repo)
-  - git -C $(brew --repo) reset --hard origin/master
-  - git -C $(brew --repo) clean -qxdff
-  - export HOMEBREW_DEVELOPER="1"
-  - brew update
-  - brew install hfsleuth
-  - mkdir -p $(brew --repo)/Library/Taps/kai5263499
-  - ln -s $PWD $(brew --repo)/Library/Taps/kai5263499/homebrew-infosec
-  - cd $(brew --repo)/Library/Taps/kai5263499/homebrew-infosec
-  - export TRAVIS_BUILD_DIR="$(brew --repo)/Library/Taps/kai5263499/homebrew-infosec"
-
+- export TRAVIS_COMMIT="$(git rev-parse --verify -q HEAD)"
+- if [ -f ".git/shallow" ]; then travis_retry git fetch --unshallow; fi
+- sudo chown -R $USER $(brew --repo)
+- git -C $(brew --repo) reset --hard origin/master
+- git -C $(brew --repo) clean -qxdff
+- export HOMEBREW_DEVELOPER="1"
+- brew update
+- rm -rf "$(brew --repo $TRAVIS_REPO_SLUG)"
+- mkdir -p "$(brew --repo $TRAVIS_REPO_SLUG)"
+- rsync -az "$TRAVIS_BUILD_DIR/" "$(brew --repo $TRAVIS_REPO_SLUG)"
+- export TRAVIS_BUILD_DIR="$(brew --repo $TRAVIS_REPO_SLUG)"
+- cd "$(brew --repo)"
+- export HOMEBREW_DEVELOPER="1"
+- ulimit -n 1024
 script:
-  - brew test-bot --no-bottle
-
+- brew test-bot --no-bottle
 notifications:
+  slack:
+    secure: tC3iRpWCcyIqw0A1l691Q01yX346234wDIfO4iIKAnozUvgnvXt0raqFyjre+iz1K3r6R7KncvmpEQdyjlLEJdrzF1kpTPKxMxLwWOT81Xixl6qL0xFcdL13ydsPForVboLx4K+TrudDhmGmq1/EWwNGCfv3/YkJrbxGS0HKZmDREaKhhMvDQvFw5n0NUZsO7PWMYV1CGlL7QMMsQWy0nAcfLo7Y5uNI1YbBm0Jt0/VRQHK5R9nclYfRfSHYXosLLuuDg0TAP/FLDc60ovphjVi3i6Gae6icrmWxIDx8YXpM0mD1UsDqwu3UWd5NVSXmzy6R7nPvC1aOCOA241YJFGK7FCX+fqdBB3MF9ZH/BWgXC49eigOM0gCjwxUvAnDbmIf3xUD4vG4px94fedk9bwOhydJoWOaF+QMSF3nkRPW4TgN4gSuFPAV/rTXYYQn4j1TIKME8OYk+8wONaruOElUhsOY8TEAJ5pO8lkj4pM7KO9y2e2h+bId7RYWfaVxzUIYUK9vbsuBfd0FdtfM11FFNlQhqPFGF6ShPCBbbc9JxcMneU4vBPc5RIxLE+AasYCbmDBpF4dP9SMtneysShhiqM75Aw/7zxZcxJ7aXiIGNOk7Z9TBKslZC4TQmu977+3o1Unz1e5tXVaEUAXNsul1PhmddMPBY2xANxSdVpsQ=
   email:
     on_success: never
     on_failure: always

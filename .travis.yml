@@ -11,8 +11,7 @@ before_install:
   - git -C $(brew --repo) clean -qxdff
   - export HOMEBREW_DEVELOPER="1"
   - brew update
-  - sudo brew install hfsleuth
-  - export PATH="$PATH:/Library/TeX/texbin"
+  - brew install hfsleuth
   - mkdir -p $(brew --repo)/Library/Taps/kai5263499
   - ln -s $PWD $(brew --repo)/Library/Taps/kai5263499/homebrew-infosec
   - cd $(brew --repo)/Library/Taps/kai5263499/homebrew-infosec

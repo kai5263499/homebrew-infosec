@@ -9,7 +9,6 @@ class Kdv < Formula
   def install
     mv "kdv.universal", "kdv"
     bin.install "kdv"
-
   end
 
   test do

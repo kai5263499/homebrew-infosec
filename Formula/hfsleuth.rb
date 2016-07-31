@@ -1,9 +1,10 @@
 class Hfsleuth < Formula
-  sha256 '8ba90374207238a8fbde77940fb1bd2c7736c7e846990f54348e793787ec0f0a'
 
-  version '1.0'
-  url 'http://www.newosxbook.com/files/hfsleuth.tar'
+  desc "explore the HFS+ B-Trees (attributes and catalog) interactively"
   homepage 'http://www.newosxbook.com/'
+  url 'http://www.newosxbook.com/files/hfsleuth.tar'
+  version '1.0'
+  sha256 '8ba90374207238a8fbde77940fb1bd2c7736c7e846990f54348e793787ec0f0a'
 
   def install
     bin.install "hfsleuth"

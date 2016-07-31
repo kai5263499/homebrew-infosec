@@ -1,4 +1,6 @@
-# Homebrew Infosec tools
+# Infosec tools for OSX via Homebrew
+
+This Homebrew tap is a collection of tools for OSX that help with information security tasks. Many of the tools in this tap are particularly useful when analyzing OSX malware.
 
 [![Build Status](https://travis-ci.org/kai5263499/homebrew-infosec.svg?branch=master)](https://travis-ci.org/kai5263499/homebrew-infosec)
 

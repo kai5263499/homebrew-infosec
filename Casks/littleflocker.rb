@@ -1,8 +1,8 @@
 cask 'littleflocker' do
-  version '0.99.60'
-  sha256 '87be8cd6ecd1867deccff22883b3552e6790ba4af2ce5264f8efe866460afa84'
+  version '0.99.70'
+  sha256 'ae120bda7c0f6aac6d1b8a82fd286e25655bcfef1ff7848da09f318c13544d72'
 
-  url "https://github.com/jzdziarski/littleflocker/releases/download/#{version}/LittleFlocker-#{version}.dmg"
+  url "https://www.zdziarski.com/littleflocker/LittleFlocker-#{version}.dmg"
   name "littleflocker"
   homepage 'http://www.zdziarski.com/blog/?page_id=6171'
   license :gratis
